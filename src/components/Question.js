@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getAnswers } from "../redux/marks/marksSlice";
 
@@ -11,6 +11,7 @@ const Question = ({ question, option1, option2, option3, option4, path }) => {
     setQuestion(event.target.value);
   };
   const onNextPage = Boolean(_question);
+  const time = useSelector((state) => state.time);
   return (
     <div>
       <form>
@@ -67,6 +68,9 @@ const Question = ({ question, option1, option2, option3, option4, path }) => {
       >
         Next
       </button>
+      <h3>
+        {time.minutes} : {time.seconds}
+      </h3>
     </div>
   );
 };
