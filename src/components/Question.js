@@ -12,6 +12,11 @@ const Question = ({ question, option1, option2, option3, option4, path }) => {
   };
   const onNextPage = Boolean(_question);
   const time = useSelector((state) => state.time);
+  React.useEffect(() => {
+    if (time.minutes === 0 && Number(time.seconds) === 0) {
+      navigate("/marks");
+    }
+  }, [time.minutes, time.seconds, navigate]);
   return (
     <div>
       <form>

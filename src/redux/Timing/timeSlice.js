@@ -2,8 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   seconds: 59,
-  minutes: 4,
-  timeAlert: "",
+  minutes: 1,
 };
 
 const timeSlice = createSlice({
@@ -12,15 +11,9 @@ const timeSlice = createSlice({
   reducers: {
     Timing: (state, action) => {
       state.seconds--;
-      switch (state.seconds) {
-        case 0:
-          state.minutes--;
-          state.seconds = 59;
-          break;
-        default:
-          state.seconds = state.seconds;
-          state.minutes = state.minutes;
-          break;
+      if (state.seconds === 0) {
+        state.minutes--;
+        state.seconds = 59;
       }
       if (state.minutes === 0) {
         state.minutes = 0;
@@ -30,9 +23,13 @@ const timeSlice = createSlice({
         state.seconds = "0" + state.seconds;
       }
     },
+    timeReseter: (state, action) => {
+      state.seconds = 59;
+      state.minutes = 1;
+    },
   },
 });
 
-export const { Timing } = timeSlice.actions;
+export const { Timing, timeReseter } = timeSlice.actions;
 
 export default timeSlice;

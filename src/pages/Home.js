@@ -1,8 +1,13 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { timeReseter } from "../redux/Timing/timeSlice";
+import { Timing } from "../redux/Timing/timeSlice";
 
 const Home = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const time = useSelector((state) => state.time);
   return (
     <div className="question-content home">
       <h2>Programming Quiz</h2>
@@ -14,7 +19,14 @@ const Home = () => {
       <button
         type="button"
         onClick={() => {
+          const timer = setInterval(() => {
+            dispatch(Timing());
+          }, 100);
+          if (time.minutes === 0 && Number(time.seconds) === 0) {
+            clearInterval(timer);
+          }
           navigate("/questionone");
+          dispatch(timeReseter());
         }}
         className="button-content"
       >
