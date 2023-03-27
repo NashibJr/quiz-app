@@ -17,10 +17,14 @@ const timeSlice = createSlice({
       }
       if (state.minutes === 0) {
         state.minutes = 0;
+        state.seconds--;
+      }
+      if (state.minutes < 0) {
+        state.minutes = 0;
         state.seconds = 0;
       }
       if (state.seconds < 10) {
-        state.seconds = "0" + state.seconds;
+        state.seconds = "0" + state.seconds--;
       }
     },
     timeReseter: (state, action) => {

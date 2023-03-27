@@ -21,7 +21,7 @@ const Home = () => {
         onClick={() => {
           const timer = setInterval(() => {
             dispatch(Timing());
-          }, 100);
+          }, 1000);
           if (time.minutes === 0 && Number(time.seconds) === 0) {
             clearInterval(timer);
           }
